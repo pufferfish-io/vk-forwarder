@@ -8,6 +8,12 @@
 *.so
 *.dylib
 
+# Local build output
+bin/
+dist/
+out/
+build/
+
 # Test binary, built with `go test -c`
 *.test
 
@@ -16,6 +22,7 @@
 coverage.*
 *.coverprofile
 profile.cov
+*.log
 
 # Dependency directories (remove the comment below to include it)
 # vendor/
@@ -30,3 +37,11 @@ go.work.sum
 # Editor/IDE
 # .idea/
 # .vscode/
+config.yaml
+.vscode
+.idea/
+.fleet/
+
+# OS files
+.DS_Store
+Thumbs.db
