@@ -48,6 +48,12 @@ func SetupRoutes(opt Options) *http.ServeMux {
 			return
 		}
 
+		if payload.Type != "message_new" {
+			opt.Logger.Info("Ignoring VK event: type=%s", payload.Type)
+			writeOK(w, opt.Logger)
+			return
+		}
+
 		if err := opt.MessProducer.Send(r.Context(), opt.VkMessTopicName, body); err != nil {
 			opt.Logger.Error("Error delivering message to Kafka: %v", err)
 			w.WriteHeader(http.StatusInternalServerError)
