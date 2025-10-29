@@ -8,12 +8,12 @@ import (
 )
 
 type Server struct {
-	Addr string `validate:"required" env:"ADDR" envDefault:":8080"`
+	Addr string `validate:"required" env:"SERVER_ADDR_VK_FORWARDER" envDefault:":8080"`
 }
 
 type Kafka struct {
 	BootstrapServersValue string `validate:"required" env:"BOOTSTRAP_SERVERS_VALUE"`
-	VkMessTopicName       string `validate:"required" env:"VK_MESS_TOPIC_NAME"`
+	VkMessTopicName       string `validate:"required" env:"TOPIC_NAME_VK_UPDATES"`
 	SaslUsername          string `validate:"required" env:"SASL_USERNAME"`
 	SaslPassword          string `validate:"required" env:"SASL_PASSWORD"`
 }
@@ -24,14 +24,14 @@ type VK struct {
 }
 
 type Api struct {
-	VkWebHookPath   string `validate:"required" env:"VK_WEB_HOOK_PATH"`
-	HealthCheckPath string `validate:"required" env:"HEALTH_CHECK_PATH"`
+	VkWebHookPath   string `validate:"required" env:"PATH_VK_FORWARDER_VK_WEB_HOOK"`
+	HealthCheckPath string `validate:"required" env:"PATH_VK_FORWARDER_HEALTH_CHECK"`
 }
 type Config struct {
-	Server Server `envPrefix:"VK_FORWARDER_SERVER_"`
-	Kafka  Kafka  `envPrefix:"VK_FORWARDER_KAFKA_"`
-	VK     VK     `envPrefix:"VK_FORWARDER_VK_"`
-	Api    Api    `envPrefix:"VK_FORWARDER_API_"`
+	Server Server
+	Kafka  Kafka `envPrefix:"KAFKA_"`
+	VK     VK    `envPrefix:"VK_"`
+	Api    Api   `envPrefix:"API_"`
 }
 
 func Load() (*Config, error) {
