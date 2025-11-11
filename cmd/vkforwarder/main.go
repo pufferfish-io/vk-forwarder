@@ -1,6 +1,7 @@
 package main
 
 import (
+	"context"
 	"log"
 	"net/http"
 
@@ -20,6 +21,7 @@ func main() {
 	defer clean()
 
 	opt := messaging.Option{
+		Context:      context.Background(),
 		Logger:       logger,
 		Broker:       cfg.Kafka.BootstrapServersValue,
 		SaslUsername: cfg.Kafka.SaslUsername,
