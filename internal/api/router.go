@@ -83,7 +83,12 @@ func verifyVKRequest(payload vkPayload, expectedSecret string, log logger.Logger
 		return true
 	}
 
-	log.Error("VK secret mismatch")
+	log.Error(
+		"VK secret mismatch (type=%s expected=%q actual=%q)",
+		payload.Type,
+		expectedSecret,
+		payload.Secret,
+	)
 
 	return false
 }
