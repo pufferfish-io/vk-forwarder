@@ -23,15 +23,10 @@ type VK struct {
 	Secret       string `validate:"required" env:"SECRET"`
 }
 
-type Api struct {
-	VkWebHookPath   string `validate:"required" env:"PATH_VK_FORWARDER_VK_WEB_HOOK"`
-	HealthCheckPath string `validate:"required" env:"PATH_VK_FORWARDER_HEALTH_CHECK"`
-}
 type Config struct {
 	Server Server
 	Kafka  Kafka `envPrefix:"KAFKA_"`
 	VK     VK    `envPrefix:"VK_"`
-	Api    Api   `envPrefix:"API_"`
 }
 
 func Load() (*Config, error) {

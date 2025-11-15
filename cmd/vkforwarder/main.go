@@ -39,8 +39,6 @@ func main() {
 		Logger:          logger,
 		MessProducer:    prod,
 		VkMessTopicName: cfg.Kafka.VkMessTopicName,
-		VkWebHookPath:   cfg.Api.VkWebHookPath,
-		HealthCheckPath: cfg.Api.HealthCheckPath,
 		Confirmation:    cfg.VK.Confirmation,
 		Secret:          cfg.VK.Secret,
 	})

@@ -12,8 +12,6 @@ type Options struct {
 	Logger          logger.Logger
 	MessProducer    *messaging.KafkaProducer
 	VkMessTopicName string
-	VkWebHookPath   string
-	HealthCheckPath string
 	Confirmation    string
 	Secret          string
 }
@@ -21,7 +19,7 @@ type Options struct {
 func SetupRoutes(opt Options) *http.ServeMux {
 	mux := http.NewServeMux()
 
-	mux.HandleFunc(opt.VkWebHookPath, func(w http.ResponseWriter, r *http.Request) {
+	mux.HandleFunc("/webhook", func(w http.ResponseWriter, r *http.Request) {
 		body, err := io.ReadAll(r.Body)
 		if err != nil {
 			opt.Logger.Error("Failed to read request body: %v", err)
@@ -64,7 +62,7 @@ func SetupRoutes(opt Options) *http.ServeMux {
 		writeOK(w, opt.Logger)
 	})
 
-	mux.HandleFunc(opt.HealthCheckPath, func(w http.ResponseWriter, r *http.Request) {
+	mux.HandleFunc("/healthz", func(w http.ResponseWriter, r *http.Request) {
 		writeOK(w, opt.Logger)
 	})
 
